@@ -101,6 +101,8 @@ int DeplacementPossible(Case tab[][10], Case *depart, Case *arrive)
 	{
 		if (dist == 1 && arrive->type == 0) // Mouvement d'une case contigue
 			retour = 1;
+		else if (dist == 2 && arrive->type == 0 && CaseVide(tab, depart, dir) == 1) // Déplacement de 2 cases (unique au Singe)
+			retour = 1;
 		else if (dist == 2 && arrive->type == 0 && SautPossible(tab, depart, dir) == 1) // Saut
 			retour = 1;
 	}
@@ -109,7 +111,7 @@ int DeplacementPossible(Case tab[][10], Case *depart, Case *arrive)
 	{
 		if (dist == 1 && arrive->type == 0) // Mouvement d'une case contigue
 			retour = 1;
-		else if (dist == 2 && arrive->type == 0 && SautPossible(tab, depart, dir) == 1) // Saut
+		else if (dist == 2 && arrive->type == 0 && SautPossible(tab, depart, dir) == 1) // Saut 
 			retour = 1;
 	}
 	// Dragon
@@ -160,35 +162,80 @@ int SautPossible(Case tab[][10], Case *depart, int dir)
 	switch(dir)
 	{
 		case 0: // Haut
-			if (tab[x][y-1].type <= depart->type)
+			if (tab[x][y-1].type <= depart->type && tab[x][y-1].type != 0)
 				retour = 1;
 			break;
 		case 1: // Diag Haut Droit
-			if (tab[x+1][y-1].type <= depart->type)
+			if (tab[x+1][y-1].type <= depart->type && tab[x+1][y-1].type != 0)
 				retour = 1;
 			break;
 		case 2: // Droite
-			if (tab[x+1][y].type <= depart->type)
+			if (tab[x+1][y].type <= depart->type && tab[x+1][y].type != 0)
 				retour = 1;
 			break;
 		case 3: // Diag Bas Droite
-			if (tab[x+1][y+1].type <= depart->type)
+			if (tab[x+1][y+1].type <= depart->type && tab[x+1][y+1].type != 0)
 				retour = 1;
 			break;
 		case 4: // Bas
-			if (tab[x][y+1].type <= depart->type)
+			if (tab[x][y+1].type <= depart->type && tab[x][y+1].type != 0)
 				retour = 1;
 			break;
 		case 5: // Diag Bas Gauche
-			if (tab[x-1][y+1].type <= depart->type)
+			if (tab[x-1][y+1].type <= depart->type && tab[x-1][y+1].type != 0)
 				retour = 1;
 			break;
 		case 6: // Gauche
-			if (tab[x-1][y].type <= depart->type)
+			if (tab[x-1][y].type <= depart->type && tab[x-1][y].type != 0)
 				retour = 1;
 			break;
 		case 7: // Diag Haut Gauche
-			if (tab[x-1][y-1].type <= depart->type)
+			if (tab[x-1][y-1].type <= depart->type && tab[x-1][y-1].type != 0)
+				retour = 1;
+			break;
+	}
+
+	return retour;
+}
+
+int CaseVide(Case tab[][10], Case *depart, int dir)
+{
+	int retour = 0;
+	int x = depart->x;
+	int y = depart->y;
+
+	switch(dir)
+	{
+		case 0: // Haut
+			if (tab[x][y-1].type == 0)
+				retour = 1;
+			break;
+		case 1: // Diag Haut Droit
+			if (tab[x+1][y-1].type == 0)
+				retour = 1;
+			break;
+		case 2: // Droite
+			if (tab[x+1][y].type == 0)
+				retour = 1;
+			break;
+		case 3: // Diag Bas Droite
+			if (tab[x+1][y+1].type == 0)
+				retour = 1;
+			break;
+		case 4: // Bas
+			if (tab[x][y+1].type == 0)
+				retour = 1;
+			break;
+		case 5: // Diag Bas Gauche
+			if (tab[x-1][y+1].type == 0)
+				retour = 1;
+			break;
+		case 6: // Gauche
+			if (tab[x-1][y].type == 0)
+				retour = 1;
+			break;
+		case 7: // Diag Haut Gauche
+			if (tab[x-1][y-1].type == 0)
 				retour = 1;
 			break;
 	}

@@ -41,6 +41,10 @@ int Direction(Case *depart, Case *arrive, int dist);
 // # 1: Si possible / 0: Si impossible
 int SautPossible(Case tab[][10], Case *depart, int dir);
 
+// @ Testant si la case contigue est vide
+// # 1: Si vide / 0: Si non vide
+int CaseVide(Case tab[][10], Case *depart, int dir);
+
 // @ Déplaçant le pion vers la case indiquée
 void Deplacement(Case *depart, Case *arrive);
 
