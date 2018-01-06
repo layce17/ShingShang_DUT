@@ -1,4 +1,4 @@
-Version 1.4.0
+Version 0.1.4
 
 Ajout de la structure Joueur et des variables gloables correspondantes
 Détection de victoire ajoutée
