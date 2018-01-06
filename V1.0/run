@@ -1,0 +1,5 @@
+#! /bin/bash
+
+clear
+gcc *.c -o ShingShang -lm
+./ShingShang
